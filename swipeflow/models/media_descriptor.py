@@ -26,7 +26,7 @@ class MediaDescriptor:
             url (None | str | Unset): Signed URL for the bytes, once uploaded. Do not cache or persist it.
             url_expires_at (datetime.datetime | None | Unset): Absolute expiry for `url`. Every row in one response shares
                 the same value.
-            project_id (str | Unset):  Example: 507f1f77bcf86cd799439012.
+            project_id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
             status (MediaDescriptorStatus | Unset):
             created_at (datetime.datetime | Unset):
             uploaded_at (datetime.datetime | None | Unset):

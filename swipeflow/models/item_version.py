@@ -24,9 +24,9 @@ T = TypeVar("T", bound="ItemVersion")
 class ItemVersion:
     """
     Attributes:
-        id (str | Unset): Version ID Example: 507f1f77bcf86cd799439011.
-        item_id (str | Unset): Item ID Example: 507f1f77bcf86cd799439012.
-        project_id (str | Unset): Project ID Example: 507f1f77bcf86cd799439013.
+        id (str | Unset): Version ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        item_id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
+        project_id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
         version (int | Unset): Version number Example: 2.
         title (str | Unset): Item title at this version Example: Updated Title.
         description (str | Unset): Item description at this version Example: Updated description.
@@ -36,7 +36,7 @@ class ItemVersion:
         metadata (ItemVersionMetadata | Unset): Custom metadata at this version Example: {'author': 'John Doe'}.
         status (ItemVersionStatus | Unset): Status at this version Example: pending.
         decisions (list[ItemDecision] | Unset):
-        created_by (str | Unset): User who created this version Example: 507f1f77bcf86cd799439014.
+        created_by (str | Unset): User who created this version Example: 0192f1a4-7c3e-7507-9f1f-6cd799439014.
         actor_name (str | Unset): Display name of who submitted this version (user, API key, or OAuth client name)
             Example: Claude.
         created_at (datetime.datetime | Unset): When this version was created / submitted (v1 == item creation) Example:

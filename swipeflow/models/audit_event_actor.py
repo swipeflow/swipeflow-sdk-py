@@ -17,7 +17,8 @@ class AuditEventActor:
     """
     Attributes:
         actor_type (AuditEventActorActorType | Unset):  Example: user.
-        user_id (None | str | Unset): Account the action ran under, when there is one Example: 507f1f77bcf86cd799439011.
+        user_id (None | str | Unset): Account the action ran under, when there is one Example:
+            0192f1a4-7c3e-7507-9f1f-6cd799439011.
         name (str | Unset): Snapshot of the acting party's display name Example: Jane Doe.
         email (None | str | Unset):  Example: jane@example.com.
     """

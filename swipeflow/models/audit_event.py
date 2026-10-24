@@ -24,14 +24,13 @@ T = TypeVar("T", bound="AuditEvent")
 class AuditEvent:
     """
     Attributes:
-        id (str | Unset):  Example: 507f1f77bcf86cd799439011.
-        type_ (AuditEventType | Unset): Type of a recorded audit event. COMMENT_* and USER_LOGIN* values are reserved
-            and not emitted yet.
-             Example: ITEM_APPROVED.
+        id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        type_ (AuditEventType | Unset): Type of a recorded audit event, from the product's audit-events.yaml.
+             Example: WEBHOOK_CREATED.
         actor (AuditEventActor | Unset):
-        project_id (None | str | Unset):  Example: 507f1f77bcf86cd799439011.
+        project_id (None | str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         subject_user_id (None | str | Unset): The user this event is about, when distinct from the actor Example:
-            507f1f77bcf86cd799439011.
+            0192f1a4-7c3e-7507-9f1f-6cd799439011.
         target (AuditEventTarget | Unset):
         metadata (AuditEventMetadataType0 | None | Unset): Event-specific detail. Never contains secrets.
         related_project_ids (list[str] | None | Unset): Projects an API-key event is relevant to, even though the event

@@ -76,7 +76,7 @@ from swipeflow.api.projects.list_projects import asyncio as list_projects_async 
 
 Importing the module works too (`from swipeflow.api.projects import list_projects`, then `list_projects.sync(client=client)`), which is handy if you use several variants of the same endpoint.
 
-Endpoints whose spec entry declares no response schema (currently `billing` and a few deletes and redirects) only have the `*_detailed` variants; read the body from `response.content`.
+Endpoints whose spec entry declares no response schema (currently a few deletes and redirects) only have the `*_detailed` variants; read the body from `response.content`.
 
 Browse `swipeflow/api/` (or the [OpenAPI spec](https://api.swipeflow.io/v1/openapi.json)) to discover endpoints. Editors autocomplete every parameter and model field.
 

@@ -15,7 +15,7 @@ T = TypeVar("T", bound="ProjectTrigger")
 class ProjectTrigger:
     """
     Attributes:
-        id (str | Unset): Trigger ID Example: 507f1f77bcf86cd799439011.
+        id (str | Unset): Trigger ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         name (str | Unset): Display name for the trigger Example: Content Published.
         event (str | Unset): Event name sent in webhook payload Example: content_published.
     """

@@ -15,7 +15,7 @@ T = TypeVar("T", bound="PublicUserProfile")
 class PublicUserProfile:
     """
     Attributes:
-        id (str | Unset): User ID Example: 507f1f77bcf86cd799439011.
+        id (str | Unset): User ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         first_name (str | Unset): User's first name Example: John.
         last_name (str | Unset): User's last name Example: Doe.
         picture (str | Unset): URL to user's profile picture Example: https://example.com/profile.jpg.

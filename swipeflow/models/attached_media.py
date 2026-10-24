@@ -23,8 +23,8 @@ class AttachedMedia:
             content_type (str | Unset):  Example: image/png.
             size (int | Unset): Size in bytes Example: 245678.
             url (str | Unset): Signed URL for the bytes, always present. Expires at `urlExpiresAt`; do not cache or persist
-                it — refetch the containing item/list to refresh. Example: https://abc123.r2.cloudflarestorage.com/swipeflow-
-                media/...&X-Amz-Signature=....
+                it — refetch the containing item/list to refresh. Example:
+                https://abc123.r2.cloudflarestorage.com/media/...&X-Amz-Signature=....
             url_expires_at (datetime.datetime | Unset): Absolute expiry for `url`. Every media entry in one response shares
                 the same value. Example: 2024-01-15T11:30:00Z.
     """

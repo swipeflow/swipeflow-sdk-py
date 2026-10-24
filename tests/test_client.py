@@ -4,8 +4,7 @@ import httpx
 import pytest
 
 from swipeflow import DEFAULT_BASE_URL, SwipeFlowClient, SwipeFlowError
-from swipeflow.api.billing import get_billing
-from swipeflow.api.projects import get_project, list_projects
+from swipeflow.api.projects import delete_project, get_project, list_projects
 from swipeflow.models import ProjectList
 
 
@@ -159,10 +158,10 @@ def test_endpoint_functions_can_be_imported_directly():
 
 def test_endpoints_without_response_schema_expose_raw_content():
     def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json={"plan": "free"})
+        return httpx.Response(200, json={"deleted": True})
 
     with make_client(handler, api_key="k") as client:
-        response = get_billing.sync_detailed(client=client)
+        response = delete_project.sync_detailed("01a16eaf-8ca5-713b-95fa-53cdda87e161", client=client)
 
     assert response.status_code == 200
-    assert response.content == b'{"plan":"free"}'
+    assert response.content == b'{"deleted":true}'
