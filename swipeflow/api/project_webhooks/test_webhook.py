@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
+from typing import Any
 from urllib.parse import quote
 
 import httpx
@@ -7,6 +7,7 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error_response import ErrorResponse
+from ...models.webhook_test import WebhookTest
 from ...types import Response
 
 
@@ -28,10 +29,11 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Any | ErrorResponse | None:
-    if response.status_code == 200:
-        response_200 = cast(Any, None)
-        return response_200
+) -> ErrorResponse | WebhookTest | None:
+    if response.status_code == 202:
+        response_202 = WebhookTest.from_dict(response.json())
+
+        return response_202
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
@@ -51,7 +53,7 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[Any | ErrorResponse]:
+) -> Response[ErrorResponse | WebhookTest]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,10 +67,12 @@ def sync_detailed(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Any | ErrorResponse]:
+) -> Response[ErrorResponse | WebhookTest]:
     """Test webhook
 
-     Send a test payload to the webhook
+     Queues one signed `test` request to the webhook's URL. It is sent once, without retries, and doesn't
+    affect the webhook's health or suspension. Poll the returned test for the result; it also appears in
+    the webhook's logs.
 
     Args:
         project_id (str):
@@ -79,7 +83,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | ErrorResponse]
+        Response[ErrorResponse | WebhookTest]
     """
 
     kwargs = _get_kwargs(
@@ -99,10 +103,12 @@ def sync(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Any | ErrorResponse | None:
+) -> ErrorResponse | WebhookTest | None:
     """Test webhook
 
-     Send a test payload to the webhook
+     Queues one signed `test` request to the webhook's URL. It is sent once, without retries, and doesn't
+    affect the webhook's health or suspension. Poll the returned test for the result; it also appears in
+    the webhook's logs.
 
     Args:
         project_id (str):
@@ -113,7 +119,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | ErrorResponse
+        ErrorResponse | WebhookTest
     """
 
     return sync_detailed(
@@ -128,10 +134,12 @@ async def asyncio_detailed(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Any | ErrorResponse]:
+) -> Response[ErrorResponse | WebhookTest]:
     """Test webhook
 
-     Send a test payload to the webhook
+     Queues one signed `test` request to the webhook's URL. It is sent once, without retries, and doesn't
+    affect the webhook's health or suspension. Poll the returned test for the result; it also appears in
+    the webhook's logs.
 
     Args:
         project_id (str):
@@ -142,7 +150,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | ErrorResponse]
+        Response[ErrorResponse | WebhookTest]
     """
 
     kwargs = _get_kwargs(
@@ -160,10 +168,12 @@ async def asyncio(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Any | ErrorResponse | None:
+) -> ErrorResponse | WebhookTest | None:
     """Test webhook
 
-     Send a test payload to the webhook
+     Queues one signed `test` request to the webhook's URL. It is sent once, without retries, and doesn't
+    affect the webhook's health or suspension. Poll the returned test for the result; it also appears in
+    the webhook's logs.
 
     Args:
         project_id (str):
@@ -174,7 +184,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | ErrorResponse
+        ErrorResponse | WebhookTest
     """
 
     return (

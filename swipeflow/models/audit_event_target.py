@@ -16,8 +16,8 @@ T = TypeVar("T", bound="AuditEventTarget")
 class AuditEventTarget:
     """
     Attributes:
-        type_ (AuditEventTargetType | Unset):  Example: item.
-        id (str | Unset):  Example: 507f1f77bcf86cd799439011.
+        type_ (AuditEventTargetType | Unset): One of the target types in the product's audit-events.yaml. Example: item.
+        id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         display_name (None | str | Unset):  Example: Q3 launch announcement.
     """
 

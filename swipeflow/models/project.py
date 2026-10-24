@@ -22,7 +22,7 @@ T = TypeVar("T", bound="Project")
 class Project:
     """
     Attributes:
-        id (str | Unset): Project ID Example: 507f1f77bcf86cd799439011.
+        id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         name (str | Unset): Project name Example: My Project.
         description (str | Unset): Project description Example: A sample project for content approval.
         members (list[ProjectMember] | Unset):

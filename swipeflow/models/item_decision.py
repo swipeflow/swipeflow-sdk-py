@@ -17,7 +17,7 @@ T = TypeVar("T", bound="ItemDecision")
 class ItemDecision:
     """
     Attributes:
-        user_id (str | Unset): User who made the decision Example: 507f1f77bcf86cd799439011.
+        user_id (str | Unset): User who made the decision Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         decision (DecisionType | Unset): Type of decision made on an item Example: approved.
         comment (str | Unset): Optional comment for the decision Example: Looks good!.
         timestamp (datetime.datetime | Unset): When the decision was made Example: 2024-01-15T10:30:00Z.

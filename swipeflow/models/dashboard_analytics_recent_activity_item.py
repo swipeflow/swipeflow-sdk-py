@@ -7,7 +7,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.activity_type import ActivityType
 from ..models.item_status import ItemStatus
 from ..types import UNSET, Unset
 
@@ -24,7 +23,7 @@ class DashboardAnalyticsRecentActivityItem:
         title (str | Unset): Item title Example: New Blog Post.
         status (ItemStatus | Unset): Status of an item in the approval workflow Example: pending.
         timestamp (datetime.datetime | Unset): Activity timestamp Example: 2024-01-15T10:30:00Z.
-        activity_type (ActivityType | Unset): Type of activity performed on an item Example: created.
+        activity_type (str | Unset): The item's last decision, or Created Example: Approved.
         actor (str | Unset): User who performed the action Example: user@example.com.
         comment (str | Unset): Optional comment Example: Looks good.
     """
@@ -35,7 +34,7 @@ class DashboardAnalyticsRecentActivityItem:
     title: str | Unset = UNSET
     status: ItemStatus | Unset = UNSET
     timestamp: datetime.datetime | Unset = UNSET
-    activity_type: ActivityType | Unset = UNSET
+    activity_type: str | Unset = UNSET
     actor: str | Unset = UNSET
     comment: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -57,9 +56,7 @@ class DashboardAnalyticsRecentActivityItem:
         if not isinstance(self.timestamp, Unset):
             timestamp = self.timestamp.isoformat()
 
-        activity_type: str | Unset = UNSET
-        if not isinstance(self.activity_type, Unset):
-            activity_type = self.activity_type.value
+        activity_type = self.activity_type
 
         actor = self.actor
 
@@ -114,12 +111,7 @@ class DashboardAnalyticsRecentActivityItem:
         else:
             timestamp = datetime.datetime.fromisoformat(_timestamp)
 
-        _activity_type = d.pop("activityType", UNSET)
-        activity_type: ActivityType | Unset
-        if isinstance(_activity_type, Unset):
-            activity_type = UNSET
-        else:
-            activity_type = ActivityType(_activity_type)
+        activity_type = d.pop("activityType", UNSET)
 
         actor = d.pop("actor", UNSET)
 

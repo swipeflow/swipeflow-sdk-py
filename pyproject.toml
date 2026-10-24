@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swipeflow"
-version = "1.1.6"
+version = "1.2.0"
 description = "Python SDK for SwipeFlow API - Add manual approval steps to your workflows with an efficient card-based swipe interface"
 readme = "README.md"
 license = {text = "ISC"}

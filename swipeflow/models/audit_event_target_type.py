@@ -8,6 +8,8 @@ class AuditEventTargetType(StrEnum):
     ITEM_VERSION = "item_version"
     MEMBER = "member"
     PROJECT = "project"
+    SETTINGS = "settings"
+    USER = "user"
     WEBHOOK = "webhook"
 
     def __str__(self) -> str:

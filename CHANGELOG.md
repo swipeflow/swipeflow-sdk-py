@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-24
+
+### Changed (breaking)
+- Regenerated from the public spec, which now covers only SwipeFlow's domain API. The platform endpoints are gone: `swipeflow.api.billing`, `api_keys`, `notifications`, `settings` and `users`. Ids are UUIDs.
+
+### Added
+- Webhook delivery endpoints under `swipeflow.api.project_webhooks`: deliveries, replay, backfill, cursor, events, secret rotation and reactivation.
+
 ## [1.1.6] - 2026-09-21
 
 ### Added

@@ -26,8 +26,8 @@ T = TypeVar("T", bound="Item")
 class Item:
     """
     Attributes:
-        id (str | Unset): Item ID Example: 507f1f77bcf86cd799439011.
-        project_id (str | Unset): Project ID Example: 507f1f77bcf86cd799439012.
+        id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        project_id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
         title (str | Unset): Item title Example: New Blog Post.
         description (str | Unset): Item description Example: A blog post about API design.
         content (ItemContent | Unset):
@@ -40,7 +40,7 @@ class Item:
         processed (ItemProcessed | None | Unset): Set once the requester has confirmed it acted on the decision (see PUT
             /:itemId/processed). Only ever present on 'approved'/'rejected' items — null everywhere else, including for a
             'change_requested' item, which closes out via a new version instead of this.
-        created_by (str | Unset): User who created the item Example: 507f1f77bcf86cd799439013.
+        created_by (str | Unset): User who created the item Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
         actor_name (str | Unset): Display name of who authored the current version (user, API key, or OAuth client name)
             Example: Claude.
         version (int | Unset): Version number Example: 1.

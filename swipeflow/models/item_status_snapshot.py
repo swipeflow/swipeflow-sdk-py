@@ -22,7 +22,7 @@ class ItemStatusSnapshot:
     cheap alternative to fetching the full item when polling.
 
         Attributes:
-            id (str | Unset): Item ID Example: 507f1f77bcf86cd799439011.
+            id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
             status (ItemStatus | Unset): Status of an item in the approval workflow Example: pending.
             version (int | Unset): Version number Example: 1.
             decision (ItemDecision | None | Unset): The most recent decision, or null if none has been made yet

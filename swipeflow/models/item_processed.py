@@ -19,7 +19,7 @@ class ItemProcessed:
 
         Attributes:
             processed_at (datetime.datetime | Unset): When the item was marked processed Example: 2024-01-15T11:00:00Z.
-            processed_by (str | Unset): User who marked the item processed Example: 507f1f77bcf86cd799439013.
+            processed_by (str | Unset): User who marked the item processed Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
             action (str | Unset): Optional free-text note on what was done with the decision Example: Published to CMS.
             actor_name (str | Unset): Display name of who marked it processed (user, API key, or OAuth client name) Example:
                 Claude.
