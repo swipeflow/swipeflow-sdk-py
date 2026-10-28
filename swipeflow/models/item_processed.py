@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,7 +19,7 @@ class ItemProcessed:
 
         Attributes:
             processed_at (datetime.datetime | Unset): When the item was marked processed Example: 2024-01-15T11:00:00Z.
-            processed_by (str | Unset): User who marked the item processed Example: 507f1f77bcf86cd799439013.
+            processed_by (str | Unset): User who marked the item processed Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
             action (str | Unset): Optional free-text note on what was done with the decision Example: Published to CMS.
             actor_name (str | Unset): Display name of who marked it processed (user, API key, or OAuth client name) Example:
                 Claude.
@@ -57,7 +57,7 @@ class ItemProcessed:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         _processed_at = d.pop("processedAt", UNSET)
         processed_at: datetime.datetime | Unset

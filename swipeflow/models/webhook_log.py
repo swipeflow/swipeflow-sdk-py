@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,8 +20,10 @@ T = TypeVar("T", bound="WebhookLog")
 class WebhookLog:
     """
     Attributes:
-        id (str | Unset): Log ID Example: 507f1f77bcf86cd799439011.
-        webhook_id (str | Unset): Webhook ID Example: 507f1f77bcf86cd799439012.
+        id (str | Unset): Log ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        webhook_id (str | Unset): Webhook ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
+        delivery_id (None | str | Unset): The delivery this log entry belongs to. Absent for legacy pre-delivery-worker
+            log rows. Example: 0192f1a4-7c3e-7507-9f1f-6cd799439014.
         event (str | Unset): Event that triggered the webhook Example: item.created.
         payload (WebhookLogPayload | Unset): Payload sent to webhook Example: {'itemId': '123', 'action': 'created'}.
         response_status (int | Unset): HTTP response status code Example: 200.
@@ -33,6 +35,7 @@ class WebhookLog:
 
     id: str | Unset = UNSET
     webhook_id: str | Unset = UNSET
+    delivery_id: None | str | Unset = UNSET
     event: str | Unset = UNSET
     payload: WebhookLogPayload | Unset = UNSET
     response_status: int | Unset = UNSET
@@ -46,6 +49,12 @@ class WebhookLog:
         id = self.id
 
         webhook_id = self.webhook_id
+
+        delivery_id: None | str | Unset
+        if isinstance(self.delivery_id, Unset):
+            delivery_id = UNSET
+        else:
+            delivery_id = self.delivery_id
 
         event = self.event
 
@@ -72,6 +81,8 @@ class WebhookLog:
             field_dict["id"] = id
         if webhook_id is not UNSET:
             field_dict["webhookId"] = webhook_id
+        if delivery_id is not UNSET:
+            field_dict["deliveryId"] = delivery_id
         if event is not UNSET:
             field_dict["event"] = event
         if payload is not UNSET:
@@ -90,13 +101,22 @@ class WebhookLog:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.webhook_log_payload import WebhookLogPayload  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.webhook_log_payload import WebhookLogPayload
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         webhook_id = d.pop("webhookId", UNSET)
+
+        def _parse_delivery_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        delivery_id = _parse_delivery_id(d.pop("deliveryId", UNSET))
 
         event = d.pop("event", UNSET)
 
@@ -125,6 +145,7 @@ class WebhookLog:
         webhook_log = cls(
             id=id,
             webhook_id=webhook_id,
+            delivery_id=delivery_id,
             event=event,
             payload=payload,
             response_status=response_status,

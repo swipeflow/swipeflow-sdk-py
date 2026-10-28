@@ -21,9 +21,9 @@ except PackageNotFoundError:
     __version__ = "0+unknown"
 
 __all__ = (
+    "DEFAULT_BASE_URL",
     "AuthenticatedClient",
     "Client",
-    "DEFAULT_BASE_URL",
     "SwipeFlowClient",
     "SwipeFlowError",
     "__version__",

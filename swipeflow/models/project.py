@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,7 +22,7 @@ T = TypeVar("T", bound="Project")
 class Project:
     """
     Attributes:
-        id (str | Unset): Project ID Example: 507f1f77bcf86cd799439011.
+        id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         name (str | Unset): Project name Example: My Project.
         description (str | Unset): Project description Example: A sample project for content approval.
         members (list[ProjectMember] | Unset):
@@ -138,10 +138,10 @@ class Project:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.project_media_usage import ProjectMediaUsage  # noqa: PLC0415
-        from ..models.project_member import ProjectMember  # noqa: PLC0415
-        from ..models.project_trigger import ProjectTrigger  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.project_media_usage import ProjectMediaUsage
+        from ..models.project_member import ProjectMember
+        from ..models.project_trigger import ProjectTrigger
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)

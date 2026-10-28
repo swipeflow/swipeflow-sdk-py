@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,7 +15,7 @@ T = TypeVar("T", bound="AddProjectMemberRequest")
 class AddProjectMemberRequest:
     """
     Attributes:
-        user_id (str): Member's user ID Example: 507f1f77bcf86cd799439011.
+        user_id (str): Member's user ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         role (ProjectRole): Role of a member in a project:
             - owner: Project creator, cannot be removed
             - admin: Can manage members and settings
@@ -45,7 +45,7 @@ class AddProjectMemberRequest:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         user_id = d.pop("userId")
 

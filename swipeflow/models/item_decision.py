@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,7 +17,7 @@ T = TypeVar("T", bound="ItemDecision")
 class ItemDecision:
     """
     Attributes:
-        user_id (str | Unset): User who made the decision Example: 507f1f77bcf86cd799439011.
+        user_id (str | Unset): User who made the decision Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         decision (DecisionType | Unset): Type of decision made on an item Example: approved.
         comment (str | Unset): Optional comment for the decision Example: Looks good!.
         timestamp (datetime.datetime | Unset): When the decision was made Example: 2024-01-15T10:30:00Z.
@@ -71,7 +71,7 @@ class ItemDecision:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         user_id = d.pop("userId", UNSET)
 

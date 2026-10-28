@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,8 +16,8 @@ T = TypeVar("T", bound="AuditEventTarget")
 class AuditEventTarget:
     """
     Attributes:
-        type_ (AuditEventTargetType | Unset):  Example: item.
-        id (str | Unset):  Example: 507f1f77bcf86cd799439011.
+        type_ (AuditEventTargetType | Unset): One of the target types in the product's audit-events.yaml. Example: item.
+        id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         display_name (None | str | Unset):  Example: Q3 launch announcement.
     """
 
@@ -52,7 +52,7 @@ class AuditEventTarget:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         _type_ = d.pop("type", UNSET)
         type_: AuditEventTargetType | Unset

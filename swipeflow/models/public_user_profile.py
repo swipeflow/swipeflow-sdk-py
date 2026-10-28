@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,7 +15,7 @@ T = TypeVar("T", bound="PublicUserProfile")
 class PublicUserProfile:
     """
     Attributes:
-        id (str | Unset): User ID Example: 507f1f77bcf86cd799439011.
+        id (str | Unset): User ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         first_name (str | Unset): User's first name Example: John.
         last_name (str | Unset): User's last name Example: Doe.
         picture (str | Unset): URL to user's profile picture Example: https://example.com/profile.jpg.
@@ -51,7 +51,7 @@ class PublicUserProfile:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,7 +22,7 @@ class ItemStatusSnapshot:
     cheap alternative to fetching the full item when polling.
 
         Attributes:
-            id (str | Unset): Item ID Example: 507f1f77bcf86cd799439011.
+            id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
             status (ItemStatus | Unset): Status of an item in the approval workflow Example: pending.
             version (int | Unset): Version number Example: 1.
             decision (ItemDecision | None | Unset): The most recent decision, or null if none has been made yet
@@ -35,7 +35,7 @@ class ItemStatusSnapshot:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.item_decision import ItemDecision  # noqa: PLC0415
+        from ..models.item_decision import ItemDecision
 
         id = self.id
 
@@ -68,8 +68,8 @@ class ItemStatusSnapshot:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.item_decision import ItemDecision  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.item_decision import ItemDecision
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)

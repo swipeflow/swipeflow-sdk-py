@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -26,8 +26,8 @@ T = TypeVar("T", bound="Item")
 class Item:
     """
     Attributes:
-        id (str | Unset): Item ID Example: 507f1f77bcf86cd799439011.
-        project_id (str | Unset): Project ID Example: 507f1f77bcf86cd799439012.
+        id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        project_id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
         title (str | Unset): Item title Example: New Blog Post.
         description (str | Unset): Item description Example: A blog post about API design.
         content (ItemContent | Unset):
@@ -40,7 +40,7 @@ class Item:
         processed (ItemProcessed | None | Unset): Set once the requester has confirmed it acted on the decision (see PUT
             /:itemId/processed). Only ever present on 'approved'/'rejected' items — null everywhere else, including for a
             'change_requested' item, which closes out via a new version instead of this.
-        created_by (str | Unset): User who created the item Example: 507f1f77bcf86cd799439013.
+        created_by (str | Unset): User who created the item Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
         actor_name (str | Unset): Display name of who authored the current version (user, API key, or OAuth client name)
             Example: Claude.
         version (int | Unset): Version number Example: 1.
@@ -72,7 +72,7 @@ class Item:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.item_processed import ItemProcessed  # noqa: PLC0415
+        from ..models.item_processed import ItemProcessed
 
         id = self.id
 
@@ -186,13 +186,13 @@ class Item:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.attached_media import AttachedMedia  # noqa: PLC0415
-        from ..models.item_content import ItemContent  # noqa: PLC0415
-        from ..models.item_decision import ItemDecision  # noqa: PLC0415
-        from ..models.item_metadata import ItemMetadata  # noqa: PLC0415
-        from ..models.item_processed import ItemProcessed  # noqa: PLC0415
-        from ..models.item_version import ItemVersion  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.attached_media import AttachedMedia
+        from ..models.item_content import ItemContent
+        from ..models.item_decision import ItemDecision
+        from ..models.item_metadata import ItemMetadata
+        from ..models.item_processed import ItemProcessed
+        from ..models.item_version import ItemVersion
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)

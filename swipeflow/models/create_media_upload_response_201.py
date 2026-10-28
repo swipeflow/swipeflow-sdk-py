@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -30,7 +30,7 @@ class CreateMediaUploadResponse201:
         url (None | str | Unset): Signed URL for the bytes, once uploaded. Do not cache or persist it.
         url_expires_at (datetime.datetime | None | Unset): Absolute expiry for `url`. Every row in one response shares
             the same value.
-        project_id (str | Unset):  Example: 507f1f77bcf86cd799439012.
+        project_id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
         status (MediaDescriptorStatus | Unset):
         created_at (datetime.datetime | Unset):
         uploaded_at (datetime.datetime | None | Unset):
@@ -192,9 +192,9 @@ class CreateMediaUploadResponse201:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         from ..models.create_media_upload_response_201_upload import (
-            CreateMediaUploadResponse201Upload,  # noqa: PLC0415
+            CreateMediaUploadResponse201Upload,
         )
 
         d = dict(src_dict)

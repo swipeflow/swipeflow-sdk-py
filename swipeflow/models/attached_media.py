@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,8 +23,8 @@ class AttachedMedia:
             content_type (str | Unset):  Example: image/png.
             size (int | Unset): Size in bytes Example: 245678.
             url (str | Unset): Signed URL for the bytes, always present. Expires at `urlExpiresAt`; do not cache or persist
-                it — refetch the containing item/list to refresh. Example: https://abc123.r2.cloudflarestorage.com/swipeflow-
-                media/...&X-Amz-Signature=....
+                it — refetch the containing item/list to refresh. Example:
+                https://abc123.r2.cloudflarestorage.com/media/...&X-Amz-Signature=....
             url_expires_at (datetime.datetime | Unset): Absolute expiry for `url`. Every media entry in one response shares
                 the same value. Example: 2024-01-15T11:30:00Z.
     """
@@ -71,7 +71,7 @@ class AttachedMedia:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 

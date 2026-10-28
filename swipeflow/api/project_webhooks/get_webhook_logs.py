@@ -7,14 +7,42 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error_response import ErrorResponse
-from ...models.webhook_log import WebhookLog
-from ...types import Response
+from ...models.get_webhook_logs_status import GetWebhookLogsStatus
+from ...models.webhook_log_page import WebhookLogPage
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     project_id: str,
     webhook_id: str,
+    *,
+    status: GetWebhookLogsStatus | Unset = UNSET,
+    event_type: str | Unset = UNSET,
+    delivery_id: str | Unset = UNSET,
+    search: str | Unset = UNSET,
+    cursor: str | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
+
+    params: dict[str, Any] = {}
+
+    json_status: str | Unset = UNSET
+    if not isinstance(status, Unset):
+        json_status = status.value
+
+    params["status"] = json_status
+
+    params["eventType"] = event_type
+
+    params["deliveryId"] = delivery_id
+
+    params["search"] = search
+
+    params["cursor"] = cursor
+
+    params["limit"] = limit
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -22,6 +50,7 @@ def _get_kwargs(
             project_id=quote(str(project_id), safe=""),
             webhook_id=quote(str(webhook_id), safe=""),
         ),
+        "params": params,
     }
 
     return _kwargs
@@ -29,14 +58,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> ErrorResponse | list[WebhookLog] | None:
+) -> ErrorResponse | WebhookLogPage | None:
     if response.status_code == 200:
-        response_200 = []
-        _response_200 = response.json()
-        for response_200_item_data in _response_200:
-            response_200_item = WebhookLog.from_dict(response_200_item_data)
-
-            response_200.append(response_200_item)
+        response_200 = WebhookLogPage.from_dict(response.json())
 
         return response_200
 
@@ -58,7 +82,7 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[ErrorResponse | list[WebhookLog]]:
+) -> Response[ErrorResponse | WebhookLogPage]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -72,26 +96,44 @@ def sync_detailed(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[ErrorResponse | list[WebhookLog]]:
+    status: GetWebhookLogsStatus | Unset = UNSET,
+    event_type: str | Unset = UNSET,
+    delivery_id: str | Unset = UNSET,
+    search: str | Unset = UNSET,
+    cursor: str | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Response[ErrorResponse | WebhookLogPage]:
     """Get webhook logs
 
-     Get delivery logs for a specific webhook
+     Paginated delivery logs for a specific webhook, newest-first.
 
     Args:
         project_id (str):
         webhook_id (str):
+        status (GetWebhookLogsStatus | Unset):
+        event_type (str | Unset):
+        delivery_id (str | Unset):
+        search (str | Unset):
+        cursor (str | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ErrorResponse | list[WebhookLog]]
+        Response[ErrorResponse | WebhookLogPage]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         webhook_id=webhook_id,
+        status=status,
+        event_type=event_type,
+        delivery_id=delivery_id,
+        search=search,
+        cursor=cursor,
+        limit=limit,
     )
 
     response = client.get_httpx_client().request(
@@ -106,27 +148,45 @@ def sync(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> ErrorResponse | list[WebhookLog] | None:
+    status: GetWebhookLogsStatus | Unset = UNSET,
+    event_type: str | Unset = UNSET,
+    delivery_id: str | Unset = UNSET,
+    search: str | Unset = UNSET,
+    cursor: str | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> ErrorResponse | WebhookLogPage | None:
     """Get webhook logs
 
-     Get delivery logs for a specific webhook
+     Paginated delivery logs for a specific webhook, newest-first.
 
     Args:
         project_id (str):
         webhook_id (str):
+        status (GetWebhookLogsStatus | Unset):
+        event_type (str | Unset):
+        delivery_id (str | Unset):
+        search (str | Unset):
+        cursor (str | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ErrorResponse | list[WebhookLog]
+        ErrorResponse | WebhookLogPage
     """
 
     return sync_detailed(
         project_id=project_id,
         webhook_id=webhook_id,
         client=client,
+        status=status,
+        event_type=event_type,
+        delivery_id=delivery_id,
+        search=search,
+        cursor=cursor,
+        limit=limit,
     ).parsed
 
 
@@ -135,26 +195,44 @@ async def asyncio_detailed(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[ErrorResponse | list[WebhookLog]]:
+    status: GetWebhookLogsStatus | Unset = UNSET,
+    event_type: str | Unset = UNSET,
+    delivery_id: str | Unset = UNSET,
+    search: str | Unset = UNSET,
+    cursor: str | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Response[ErrorResponse | WebhookLogPage]:
     """Get webhook logs
 
-     Get delivery logs for a specific webhook
+     Paginated delivery logs for a specific webhook, newest-first.
 
     Args:
         project_id (str):
         webhook_id (str):
+        status (GetWebhookLogsStatus | Unset):
+        event_type (str | Unset):
+        delivery_id (str | Unset):
+        search (str | Unset):
+        cursor (str | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ErrorResponse | list[WebhookLog]]
+        Response[ErrorResponse | WebhookLogPage]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         webhook_id=webhook_id,
+        status=status,
+        event_type=event_type,
+        delivery_id=delivery_id,
+        search=search,
+        cursor=cursor,
+        limit=limit,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -167,21 +245,33 @@ async def asyncio(
     webhook_id: str,
     *,
     client: AuthenticatedClient,
-) -> ErrorResponse | list[WebhookLog] | None:
+    status: GetWebhookLogsStatus | Unset = UNSET,
+    event_type: str | Unset = UNSET,
+    delivery_id: str | Unset = UNSET,
+    search: str | Unset = UNSET,
+    cursor: str | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> ErrorResponse | WebhookLogPage | None:
     """Get webhook logs
 
-     Get delivery logs for a specific webhook
+     Paginated delivery logs for a specific webhook, newest-first.
 
     Args:
         project_id (str):
         webhook_id (str):
+        status (GetWebhookLogsStatus | Unset):
+        event_type (str | Unset):
+        delivery_id (str | Unset):
+        search (str | Unset):
+        cursor (str | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ErrorResponse | list[WebhookLog]
+        ErrorResponse | WebhookLogPage
     """
 
     return (
@@ -189,5 +279,11 @@ async def asyncio(
             project_id=project_id,
             webhook_id=webhook_id,
             client=client,
+            status=status,
+            event_type=event_type,
+            delivery_id=delivery_id,
+            search=search,
+            cursor=cursor,
+            limit=limit,
         )
     ).parsed

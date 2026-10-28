@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,14 +24,13 @@ T = TypeVar("T", bound="AuditEvent")
 class AuditEvent:
     """
     Attributes:
-        id (str | Unset):  Example: 507f1f77bcf86cd799439011.
-        type_ (AuditEventType | Unset): Type of a recorded audit event. COMMENT_* and USER_LOGIN* values are reserved
-            and not emitted yet.
-             Example: ITEM_APPROVED.
+        id (str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        type_ (AuditEventType | Unset): Type of a recorded audit event, from the product's audit-events.yaml.
+             Example: WEBHOOK_CREATED.
         actor (AuditEventActor | Unset):
-        project_id (None | str | Unset):  Example: 507f1f77bcf86cd799439011.
+        project_id (None | str | Unset):  Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
         subject_user_id (None | str | Unset): The user this event is about, when distinct from the actor Example:
-            507f1f77bcf86cd799439011.
+            0192f1a4-7c3e-7507-9f1f-6cd799439011.
         target (AuditEventTarget | Unset):
         metadata (AuditEventMetadataType0 | None | Unset): Event-specific detail. Never contains secrets.
         related_project_ids (list[str] | None | Unset): Projects an API-key event is relevant to, even though the event
@@ -56,12 +55,8 @@ class AuditEvent:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.audit_event_context_type_0 import (
-            AuditEventContextType0,  # noqa: PLC0415
-        )
-        from ..models.audit_event_metadata_type_0 import (
-            AuditEventMetadataType0,  # noqa: PLC0415
-        )
+        from ..models.audit_event_context_type_0 import AuditEventContextType0
+        from ..models.audit_event_metadata_type_0 import AuditEventMetadataType0
 
         id = self.id
 
@@ -145,15 +140,11 @@ class AuditEvent:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.audit_event_actor import AuditEventActor  # noqa: PLC0415
-        from ..models.audit_event_context_type_0 import (
-            AuditEventContextType0,  # noqa: PLC0415
-        )
-        from ..models.audit_event_metadata_type_0 import (
-            AuditEventMetadataType0,  # noqa: PLC0415
-        )
-        from ..models.audit_event_target import AuditEventTarget  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.audit_event_actor import AuditEventActor
+        from ..models.audit_event_context_type_0 import AuditEventContextType0
+        from ..models.audit_event_metadata_type_0 import AuditEventMetadataType0
+        from ..models.audit_event_target import AuditEventTarget
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)

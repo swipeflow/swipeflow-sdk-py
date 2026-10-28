@@ -6,7 +6,6 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error_response import ErrorResponse
-from ...models.list_projects_owner_status import ListProjectsOwnerStatus
 from ...models.list_projects_sort import ListProjectsSort
 from ...models.list_projects_status import ListProjectsStatus
 from ...models.project_list import ProjectList
@@ -22,12 +21,8 @@ def _get_kwargs(
     limit: int | Unset = 20,
     status: ListProjectsStatus | Unset = UNSET,
     starred: bool | Unset = UNSET,
-    include_all: bool | Unset = False,
-    member_user_id: str | Unset = UNSET,
-    owner_user_id: str | Unset = UNSET,
     created_from: str | Unset = UNSET,
     created_to: str | Unset = UNSET,
-    owner_status: ListProjectsOwnerStatus | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -54,21 +49,9 @@ def _get_kwargs(
 
     params["starred"] = starred
 
-    params["includeAll"] = include_all
-
-    params["memberUserId"] = member_user_id
-
-    params["ownerUserId"] = owner_user_id
-
     params["createdFrom"] = created_from
 
     params["createdTo"] = created_to
-
-    json_owner_status: str | Unset = UNSET
-    if not isinstance(owner_status, Unset):
-        json_owner_status = owner_status.value
-
-    params["ownerStatus"] = json_owner_status
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -126,12 +109,8 @@ def sync_detailed(
     limit: int | Unset = 20,
     status: ListProjectsStatus | Unset = UNSET,
     starred: bool | Unset = UNSET,
-    include_all: bool | Unset = False,
-    member_user_id: str | Unset = UNSET,
-    owner_user_id: str | Unset = UNSET,
     created_from: str | Unset = UNSET,
     created_to: str | Unset = UNSET,
-    owner_status: ListProjectsOwnerStatus | Unset = UNSET,
 ) -> Response[ErrorResponse | ProjectList]:
     """Get all projects
 
@@ -146,12 +125,8 @@ def sync_detailed(
         limit (int | Unset):  Default: 20.
         status (ListProjectsStatus | Unset):
         starred (bool | Unset):
-        include_all (bool | Unset):  Default: False.
-        member_user_id (str | Unset):
-        owner_user_id (str | Unset):
         created_from (str | Unset):
         created_to (str | Unset):
-        owner_status (ListProjectsOwnerStatus | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -169,12 +144,8 @@ def sync_detailed(
         limit=limit,
         status=status,
         starred=starred,
-        include_all=include_all,
-        member_user_id=member_user_id,
-        owner_user_id=owner_user_id,
         created_from=created_from,
         created_to=created_to,
-        owner_status=owner_status,
     )
 
     response = client.get_httpx_client().request(
@@ -194,12 +165,8 @@ def sync(
     limit: int | Unset = 20,
     status: ListProjectsStatus | Unset = UNSET,
     starred: bool | Unset = UNSET,
-    include_all: bool | Unset = False,
-    member_user_id: str | Unset = UNSET,
-    owner_user_id: str | Unset = UNSET,
     created_from: str | Unset = UNSET,
     created_to: str | Unset = UNSET,
-    owner_status: ListProjectsOwnerStatus | Unset = UNSET,
 ) -> ErrorResponse | ProjectList | None:
     """Get all projects
 
@@ -214,12 +181,8 @@ def sync(
         limit (int | Unset):  Default: 20.
         status (ListProjectsStatus | Unset):
         starred (bool | Unset):
-        include_all (bool | Unset):  Default: False.
-        member_user_id (str | Unset):
-        owner_user_id (str | Unset):
         created_from (str | Unset):
         created_to (str | Unset):
-        owner_status (ListProjectsOwnerStatus | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -238,12 +201,8 @@ def sync(
         limit=limit,
         status=status,
         starred=starred,
-        include_all=include_all,
-        member_user_id=member_user_id,
-        owner_user_id=owner_user_id,
         created_from=created_from,
         created_to=created_to,
-        owner_status=owner_status,
     ).parsed
 
 
@@ -257,12 +216,8 @@ async def asyncio_detailed(
     limit: int | Unset = 20,
     status: ListProjectsStatus | Unset = UNSET,
     starred: bool | Unset = UNSET,
-    include_all: bool | Unset = False,
-    member_user_id: str | Unset = UNSET,
-    owner_user_id: str | Unset = UNSET,
     created_from: str | Unset = UNSET,
     created_to: str | Unset = UNSET,
-    owner_status: ListProjectsOwnerStatus | Unset = UNSET,
 ) -> Response[ErrorResponse | ProjectList]:
     """Get all projects
 
@@ -277,12 +232,8 @@ async def asyncio_detailed(
         limit (int | Unset):  Default: 20.
         status (ListProjectsStatus | Unset):
         starred (bool | Unset):
-        include_all (bool | Unset):  Default: False.
-        member_user_id (str | Unset):
-        owner_user_id (str | Unset):
         created_from (str | Unset):
         created_to (str | Unset):
-        owner_status (ListProjectsOwnerStatus | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -300,12 +251,8 @@ async def asyncio_detailed(
         limit=limit,
         status=status,
         starred=starred,
-        include_all=include_all,
-        member_user_id=member_user_id,
-        owner_user_id=owner_user_id,
         created_from=created_from,
         created_to=created_to,
-        owner_status=owner_status,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -323,12 +270,8 @@ async def asyncio(
     limit: int | Unset = 20,
     status: ListProjectsStatus | Unset = UNSET,
     starred: bool | Unset = UNSET,
-    include_all: bool | Unset = False,
-    member_user_id: str | Unset = UNSET,
-    owner_user_id: str | Unset = UNSET,
     created_from: str | Unset = UNSET,
     created_to: str | Unset = UNSET,
-    owner_status: ListProjectsOwnerStatus | Unset = UNSET,
 ) -> ErrorResponse | ProjectList | None:
     """Get all projects
 
@@ -343,12 +286,8 @@ async def asyncio(
         limit (int | Unset):  Default: 20.
         status (ListProjectsStatus | Unset):
         starred (bool | Unset):
-        include_all (bool | Unset):  Default: False.
-        member_user_id (str | Unset):
-        owner_user_id (str | Unset):
         created_from (str | Unset):
         created_to (str | Unset):
-        owner_status (ListProjectsOwnerStatus | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -368,11 +307,7 @@ async def asyncio(
             limit=limit,
             status=status,
             starred=starred,
-            include_all=include_all,
-            member_user_id=member_user_id,
-            owner_user_id=owner_user_id,
             created_from=created_from,
             created_to=created_to,
-            owner_status=owner_status,
         )
     ).parsed

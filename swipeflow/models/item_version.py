@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,9 +24,9 @@ T = TypeVar("T", bound="ItemVersion")
 class ItemVersion:
     """
     Attributes:
-        id (str | Unset): Version ID Example: 507f1f77bcf86cd799439011.
-        item_id (str | Unset): Item ID Example: 507f1f77bcf86cd799439012.
-        project_id (str | Unset): Project ID Example: 507f1f77bcf86cd799439013.
+        id (str | Unset): Version ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        item_id (str | Unset): Item ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
+        project_id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439013.
         version (int | Unset): Version number Example: 2.
         title (str | Unset): Item title at this version Example: Updated Title.
         description (str | Unset): Item description at this version Example: Updated description.
@@ -36,7 +36,7 @@ class ItemVersion:
         metadata (ItemVersionMetadata | Unset): Custom metadata at this version Example: {'author': 'John Doe'}.
         status (ItemVersionStatus | Unset): Status at this version Example: pending.
         decisions (list[ItemDecision] | Unset):
-        created_by (str | Unset): User who created this version Example: 507f1f77bcf86cd799439014.
+        created_by (str | Unset): User who created this version Example: 0192f1a4-7c3e-7507-9f1f-6cd799439014.
         actor_name (str | Unset): Display name of who submitted this version (user, API key, or OAuth client name)
             Example: Claude.
         created_at (datetime.datetime | Unset): When this version was created / submitted (v1 == item creation) Example:
@@ -141,11 +141,11 @@ class ItemVersion:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.attached_media import AttachedMedia  # noqa: PLC0415
-        from ..models.item_content import ItemContent  # noqa: PLC0415
-        from ..models.item_decision import ItemDecision  # noqa: PLC0415
-        from ..models.item_version_metadata import ItemVersionMetadata  # noqa: PLC0415
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.attached_media import AttachedMedia
+        from ..models.item_content import ItemContent
+        from ..models.item_decision import ItemDecision
+        from ..models.item_version_metadata import ItemVersionMetadata
 
         d = dict(src_dict)
         id = d.pop("id", UNSET)

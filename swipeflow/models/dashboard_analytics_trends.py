@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -86,21 +86,21 @@ class DashboardAnalyticsTrends:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         from ..models.dashboard_analytics_trends_approval_rate import (
-            DashboardAnalyticsTrendsApprovalRate,  # noqa: PLC0415
+            DashboardAnalyticsTrendsApprovalRate,
         )
         from ..models.dashboard_analytics_trends_completion_rate import (
-            DashboardAnalyticsTrendsCompletionRate,  # noqa: PLC0415
+            DashboardAnalyticsTrendsCompletionRate,
         )
         from ..models.dashboard_analytics_trends_daily_new_items import (
-            DashboardAnalyticsTrendsDailyNewItems,  # noqa: PLC0415
+            DashboardAnalyticsTrendsDailyNewItems,
         )
         from ..models.dashboard_analytics_trends_pending_approvals import (
-            DashboardAnalyticsTrendsPendingApprovals,  # noqa: PLC0415
+            DashboardAnalyticsTrendsPendingApprovals,
         )
         from ..models.dashboard_analytics_trends_response_time import (
-            DashboardAnalyticsTrendsResponseTime,  # noqa: PLC0415
+            DashboardAnalyticsTrendsResponseTime,
         )
 
         d = dict(src_dict)

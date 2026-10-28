@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, Self, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,6 +11,10 @@ from ..models.webhook_event import WebhookEvent
 from ..models.webhook_type import WebhookType
 from ..types import UNSET, Unset
 
+if TYPE_CHECKING:
+    from ..models.webhook_delivery_health import WebhookDeliveryHealth
+
+
 T = TypeVar("T", bound="Webhook")
 
 
@@ -18,8 +22,8 @@ T = TypeVar("T", bound="Webhook")
 class Webhook:
     """
     Attributes:
-        id (str | Unset): Webhook ID Example: 507f1f77bcf86cd799439011.
-        project_id (str | Unset): Project ID Example: 507f1f77bcf86cd799439012.
+        id (str | Unset): Webhook ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439011.
+        project_id (str | Unset): Project ID Example: 0192f1a4-7c3e-7507-9f1f-6cd799439012.
         name (str | Unset): Webhook name Example: My Webhook.
         url (str | Unset): Webhook URL Example: https://example.com/webhook.
         type_ (WebhookType | Unset): Webhook type Example: user.
@@ -29,6 +33,8 @@ class Webhook:
             'item.approved'].
         active (bool | Unset): Whether the webhook is active Example: True.
         trigger_count (int | Unset): Number of times webhook has been triggered Example: 42.
+        delivery_status (WebhookDeliveryHealth | Unset): System-owned delivery health, separate from the user-set
+            `active` toggle.
         created_at (datetime.datetime | Unset): Creation timestamp Example: 2024-01-01T00:00:00Z.
         updated_at (datetime.datetime | Unset): Last update timestamp Example: 2024-01-15T10:30:00Z.
     """
@@ -43,6 +49,7 @@ class Webhook:
     events: list[WebhookEvent] | Unset = UNSET
     active: bool | Unset = UNSET
     trigger_count: int | Unset = UNSET
+    delivery_status: WebhookDeliveryHealth | Unset = UNSET
     created_at: datetime.datetime | Unset = UNSET
     updated_at: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -75,6 +82,10 @@ class Webhook:
 
         trigger_count = self.trigger_count
 
+        delivery_status: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.delivery_status, Unset):
+            delivery_status = self.delivery_status.to_dict()
+
         created_at: str | Unset = UNSET
         if not isinstance(self.created_at, Unset):
             created_at = self.created_at.isoformat()
@@ -106,6 +117,8 @@ class Webhook:
             field_dict["active"] = active
         if trigger_count is not UNSET:
             field_dict["triggerCount"] = trigger_count
+        if delivery_status is not UNSET:
+            field_dict["deliveryStatus"] = delivery_status
         if created_at is not UNSET:
             field_dict["createdAt"] = created_at
         if updated_at is not UNSET:
@@ -114,7 +127,9 @@ class Webhook:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
+        from ..models.webhook_delivery_health import WebhookDeliveryHealth
+
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -148,6 +163,13 @@ class Webhook:
 
         trigger_count = d.pop("triggerCount", UNSET)
 
+        _delivery_status = d.pop("deliveryStatus", UNSET)
+        delivery_status: WebhookDeliveryHealth | Unset
+        if isinstance(_delivery_status, Unset):
+            delivery_status = UNSET
+        else:
+            delivery_status = WebhookDeliveryHealth.from_dict(_delivery_status)
+
         _created_at = d.pop("createdAt", UNSET)
         created_at: datetime.datetime | Unset
         if isinstance(_created_at, Unset):
@@ -173,6 +195,7 @@ class Webhook:
             events=events,
             active=active,
             trigger_count=trigger_count,
+            delivery_status=delivery_status,
             created_at=created_at,
             updated_at=updated_at,
         )

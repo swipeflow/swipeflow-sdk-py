@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, Self, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,7 +17,8 @@ class AuditEventActor:
     """
     Attributes:
         actor_type (AuditEventActorActorType | Unset):  Example: user.
-        user_id (None | str | Unset): Account the action ran under, when there is one Example: 507f1f77bcf86cd799439011.
+        user_id (None | str | Unset): Account the action ran under, when there is one Example:
+            0192f1a4-7c3e-7507-9f1f-6cd799439011.
         name (str | Unset): Snapshot of the acting party's display name Example: Jane Doe.
         email (None | str | Unset):  Example: jane@example.com.
     """
@@ -62,7 +63,7 @@ class AuditEventActor:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+    def from_dict(cls, src_dict: Mapping[str, Any]) -> Self:
         d = dict(src_dict)
         _actor_type = d.pop("actorType", UNSET)
         actor_type: AuditEventActorActorType | Unset
